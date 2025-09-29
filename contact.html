@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Greenwood Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .contact-card { transition: all 0.3s ease; }
+        .contact-card:hover { transform: scale(1.02); }
+        .form-input { transition: all 0.3s ease; }
+        .form-input:focus { transform: translateY(-2px); }
+        .map-container { 
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            position: relative;
+            overflow: hidden;
+        }
+        .building { 
+            position: absolute;
+            background: #3b82f6;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .building:hover {
+            background: #1e40af;
+            transform: scale(1.1);
+            z-index: 10;
+        }
+        .path {
+            position: absolute;
+            background: #6b7280;
+            border-radius: 2px;
+        }
+        .green-area {
+            position: absolute;
+            background: #10b981;
+            border-radius: 8px;
+            opacity: 0.3;
+        }
+        .parking {
+            position: absolute;
+            background: #374151;
+            border-radius: 4px;
+        }
+        .tooltip {
+            position: absolute;
+            background: #1f2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 20;
+        }
+        .building:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">GA</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">Greenwood Academy</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="admission.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Admissions</a>
+                        <a href="academics.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Academics</a>
+                        <a href="news.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">News</a>
+                        <a href="contact.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://schoolera.netlify.app/" target="_blank" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Portal Login
+                    </a>
+                    <div class="md:hidden flex items-center">
+                        <a href="https://schoolera.netlify.app/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors mr-4">
+                            Portal Login
+                        </a>
+                        <button id="menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="admission.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Admissions</a>
+                <a href="academics.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Academics</a>
+                <a href="news.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">News</a>
+                <a href="contact.html" class="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                We're here to help! Reach out to us with any questions about admissions, academics, or campus life.
+            </p>
+            <div class="mt-8">
+                <button id="virtual-tour-button" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Schedule a Visit
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact Info -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center contact-card bg-blue-50 rounded-xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                        📞
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Call Us</h3>
+                    <p class="text-gray-600 mb-4">Speak directly with our staff</p>
+                    <div class="space-y-2">
+                        <p class="text-lg font-semibold text-blue-600">(555) 123-4567</p>
+                        <p class="text-sm text-gray-500">Mon-Fri: 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="text-center contact-card bg-green-50 rounded-xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                        ✉️
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Email Us</h3>
+                    <p class="text-gray-600 mb-4">Send us a message anytime</p>
+                    <div class="space-y-2">
+                        <p class="text-lg font-semibold text-green-600">info@greenwoodacademy.edu</p>
+                        <p class="text-sm text-gray-500">We respond within 24 hours</p>
+                    </div>
+                </div>
+                
+                <div class="text-center contact-card bg-purple-50 rounded-xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                        📍
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Visit Us</h3>
+                    <p class="text-gray-600 mb-4">Come see our beautiful campus</p>
+                    <div class="space-y-2">
+                        <p class="text-lg font-semibold text-purple-600">123 Education Street</p>
+                        <p class="text-sm text-gray-500">Learning City, LC 12345</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form and Map -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="fade-in">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="inquiryType" class="block text-sm font-medium text-gray-700 mb-2">Inquiry Type *</label>
+                            <select id="inquiryType" name="inquiryType" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select an option</option>
+                                <option value="admissions">Admissions</option>
+                                <option value="academics">Academics</option>
+                                <option value="student-life">Student Life</option>
+                                <option value="athletics">Athletics</option>
+                                <option value="general">General Information</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="newsletter" name="newsletter" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="newsletter" class="ml-2 block text-sm text-gray-700">
+                                Subscribe to our newsletter for updates and events
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Campus Map -->
+                <div class="fade-in">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Campus Map</h2>
+                    <div class="map-container h-96 rounded-xl relative">
+                        <!-- Buildings -->
+                        <div class="building" style="top: 20%; left: 15%; width: 80px; height: 60px;">
+                            Main
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Main Administration Building
+                            </div>
+                        </div>
+                        
+                        <div class="building" style="top: 20%; left: 40%; width: 100px; height: 80px;">
+                            Library
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Academic Resource Center & Library
+                            </div>
+                        </div>
+                        
+                        <div class="building" style="top: 45%; left: 10%; width: 90px; height: 70px;">
+                            Science
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Science & Technology Center
+                            </div>
+                        </div>
+                        
+                        <div class="building" style="top: 45%; left: 35%; width: 85px; height: 65px;">
+                            Arts
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Creative Arts Building
+                            </div>
+                        </div>
+                        
+                        <div class="building" style="top: 45%; left: 60%; width: 95px; height: 75px;">
+                            Gym
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Athletic Center & Gymnasium
+                            </div>
+                        </div>
+                        
+                        <div class="building" style="top: 70%; left: 20%; width: 120px; height: 50px;">
+                            Cafeteria
+                            <div class="tooltip" style="bottom: 100%; left: 50%; transform: translateX(-50%);">
+                                Student Dining Hall
+                            </div>
+                        </div>
+                        
+                        <!-- Green Areas -->
+                        <div class="green-area" style="top: 10%; right: 10%; width: 120px; height: 80px;"></div>
+                        <div class="green-area" style="bottom: 10%; left: 60%; width: 100px; height: 60px;"></div>
+                        
+                        <!-- Parking Areas -->
+                        <div class="parking" style="top: 5%; left: 5%; width: 60px; height: 40px;"></div>
+                        <div class="parking" style="bottom: 5%; right: 5%; width: 80px; height: 50px;"></div>
+                        
+                        <!-- Paths -->
+                        <div class="path" style="top: 50%; left: 0; width: 100%; height: 4px;"></div>
+                        <div class="path" style="top: 0; left: 50%; width: 4px; height: 100%;"></div>
+                        
+                        <!-- Legend -->
+                        <div class="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg">
+                            <h4 class="font-semibold text-sm mb-2">Legend</h4>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-600 rounded mr-2"></div>
+                                    <span>Buildings</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 opacity-30 rounded mr-2"></div>
+                                    <span>Green Areas</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-gray-600 rounded mr-2"></div>
+                                    <span>Parking</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Directions -->
+                    <div class="mt-6 bg-white rounded-xl p-6 shadow-lg">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Directions</h3>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex items-start">
+                                <span class="text-blue-600 mr-2">🚗</span>
+                                <div>
+                                    <strong>By Car:</strong> Take Highway 101 to Education Street exit. Turn right and continue for 2 miles.
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-green-600 mr-2">🚌</span>
+                                <div>
+                                    <strong>By Bus:</strong> Routes 15, 22, and 45 stop directly at our main entrance.
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-purple-600 mr-2">🚶</span>
+                                <div>
+                                    <strong>Visitor Parking:</strong> Available in the main lot near the administration building.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Department Contacts -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Department Contacts</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Connect directly with specific departments for specialized assistance</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-blue-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            🎓
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Admissions</h3>
+                            <p class="text-sm text-gray-600">New student enrollment</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Director:</strong> Sarah Johnson</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 101</p>
+                        <p><strong>Email:</strong> admissions@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 8:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            📚
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Academics</h3>
+                            <p class="text-sm text-gray-600">Curriculum & programs</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Coordinator:</strong> Dr. Michael Chen</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 102</p>
+                        <p><strong>Email:</strong> academics@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 8:30 AM - 4:30 PM</p>
+                    </div>
+                </div>
+                
+                <div class="bg-purple-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            🏃
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Athletics</h3>
+                            <p class="text-sm text-gray-600">Sports & activities</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Director:</strong> Coach Maria Rodriguez</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 103</p>
+                        <p><strong>Email:</strong> athletics@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 7:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="bg-orange-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            💰
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Financial Aid</h3>
+                            <p class="text-sm text-gray-600">Scholarships & assistance</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Officer:</strong> Jennifer Williams</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 104</p>
+                        <p><strong>Email:</strong> financial@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 9:00 AM - 3:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="bg-teal-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            🏥
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Health Services</h3>
+                            <p class="text-sm text-gray-600">Student wellness</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Nurse:</strong> Lisa Thompson, RN</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 105</p>
+                        <p><strong>Email:</strong> health@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 7:30 AM - 3:30 PM</p>
+                    </div>
+                </div>
+                
+                <div class="bg-red-50 rounded-xl p-6 card-hover fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white text-xl mr-4">
+                            🛠️
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">IT Support</h3>
+                            <p class="text-sm text-gray-600">Technology assistance</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Manager:</strong> David Park</p>
+                        <p><strong>Phone:</strong> (555) 123-4567 ext. 106</p>
+                        <p><strong>Email:</strong> support@greenwoodacademy.edu</p>
+                        <p><strong>Hours:</strong> Mon-Fri 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-600">Quick answers to common questions</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <button class="faq-button w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ('faq1')">
+                        <span class="font-semibold text-gray-900">What are your admission requirements?</span>
+                        <span class="faq-icon text-blue-600 text-xl">+</span>
+                    </button>
+                    <div id="faq1" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">We require completed application forms, academic transcripts, teacher recommendations, and a personal interview. Specific requirements vary by grade level. Contact our admissions office for detailed information.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <button class="faq-button w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ('faq2')">
+                        <span class="font-semibold text-gray-900">Do you offer financial aid?</span>
+                        <span class="faq-icon text-blue-600 text-xl">+</span>
+                    </button>
+                    <div id="faq2" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Yes, we offer need-based financial aid and merit scholarships. Our financial aid office works with families to make quality education accessible. Applications are due by February 1st for the following school year.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <button class="faq-button w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ('faq3')">
+                        <span class="font-semibold text-gray-900">What is your student-to-teacher ratio?</span>
+                        <span class="faq-icon text-blue-600 text-xl">+</span>
+                    </button>
+                    <div id="faq3" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">We maintain a 12:1 student-to-teacher ratio to ensure personalized attention and optimal learning environments. Class sizes typically range from 15-18 students.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <button class="faq-button w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFAQ('faq4')">
+                        <span class="font-semibold text-gray-900">Can I schedule a campus tour?</span>
+                        <span class="faq-icon text-blue-600 text-xl">+</span>
+                    </button>
+                    <div id="faq4" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Absolutely! We offer guided campus tours Monday through Friday at 10:00 AM and 2:00 PM. Weekend tours are available by appointment. Please call our admissions office to schedule your visit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contact -->
+    <section class="py-12 bg-red-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">Emergency Contact</h2>
+            <p class="text-red-100 mb-6">For urgent matters outside of business hours</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <span class="text-white font-semibold">Emergency Line: (555) 123-HELP</span>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <span class="text-white font-semibold">Security: (555) 123-SAFE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">GA</span>
+                        </div>
+                        <span class="text-xl font-bold">Greenwood Academy</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Excellence in education for over 25 years</p>
+                    <div class="flex space-x-4">
+                        <button class="text-gray-400 hover:text-white">📘</button>
+                        <button class="text-gray-400 hover:text-white">🐦</button>
+                        <button class="text-gray-400 hover:text-white">📷</button>
+                        <button class="text-gray-400 hover:text-white">💼</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="admission.html" class="hover:text-white">Admissions</a></li>
+                        <li><a href="academics.html" class="hover:text-white">Academics</a></li>
+                        <li><a href="news.html" class="hover:text-white">Student Life</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📍 123 Education Street<br>Learning City, LC 12345</li>
+                        <li>📞 (555) 123-4567</li>
+                        <li>✉️ info@greenwoodacademy.edu</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Office Hours</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><strong>Monday - Friday:</strong><br>8:00 AM - 5:00 PM</li>
+                        <li><strong>Saturday:</strong><br>9:00 AM - 1:00 PM</li>
+                        <li><strong>Sunday:</strong><br>Closed</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Greenwood Academy. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('bg-gray-400');
+            submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('https://script.google.com/macros/s/AKfycbw1pTqLf2kpDyxGk6SVDs3g4fwXQ9wfZ6TqL74_7MHPcbZGShztAi0CewLtjqlKe_Qb6A/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                // Show success state
+                submitBtn.textContent = 'Message Sent!';
+                submitBtn.classList.add('bg-green-600');
+                submitBtn.classList.remove('bg-gray-400');
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-600');
+                    submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error('Error!', error.message);
+                submitBtn.textContent = 'Error!';
+                submitBtn.classList.add('bg-red-600');
+                submitBtn.classList.remove('bg-gray-400');
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-red-600');
+                    submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }, 3000);
+            });
+        });
+
+        // FAQ toggle functionality
+        function toggleFAQ(faqId) {
+            const content = document.getElementById(faqId);
+            const icon = content.previousElementSibling.querySelector('.faq-icon');
+            
+            if (content.classList.contains('hidden')) {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-content').forEach(faq => {
+                    if (faq !== content) {
+                        faq.classList.add('hidden');
+                        faq.previousElementSibling.querySelector('.faq-icon').textContent = '+';
+                    }
+                });
+                
+                // Open this FAQ
+                content.classList.remove('hidden');
+                icon.textContent = '−';
+            } else {
+                // Close this FAQ
+                content.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        }
+
+        // Form validation
+        const inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-red-500');
+                } else {
+                    this.classList.remove('border-red-500');
+                    this.classList.add('border-green-500');
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('border-red-500');
+                    this.classList.add('border-green-500');
+                }
+            });
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.classList.add('border-red-500');
+                this.classList.remove('border-green-500');
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
+            }
+            this.value = value;
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <div id="virtual-tour-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Schedule a Visit</h2>
+        <form id="virtual-tour-form">
+          <input type="hidden" name="access_key" value="219dd725-fc8e-4009-b65a-d2385de4c796">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="contact">Contact Number:</label>
+          <input type="tel" id="contact" name="contact" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="visit-date">Choose a date to visit:</label>
+          <input type="date" id="visit-date" name="visit-date" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+<script src="modal.js"></script>
+<script src="navbar.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9830c0a9a41c54e7',t:'MTc1ODUzMzEwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

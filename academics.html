@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics - Greenwood Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .tab-active { background: #3b82f6; color: white; }
+        .tab-inactive { background: #f3f4f6; color: #6b7280; }
+        .course-card { transition: all 0.3s ease; cursor: pointer; }
+        .course-card:hover { background: #f8fafc; }
+        .course-details { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .course-details.expanded { max-height: 200px; }
+    </style>
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">GA</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">Greenwood Academy</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="admission.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Admissions</a>
+                        <a href="academics.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Academics</a>
+                        <a href="news.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">News</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://schoolera.netlify.app/" target="_blank" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Portal Login
+                    </a>
+                    <div class="md:hidden flex items-center">
+                        <a href="https://schoolera.netlify.app/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors mr-4">
+                            Portal Login
+                        </a>
+                        <button id="menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="admission.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Admissions</a>
+                <a href="academics.html" class="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Academics</a>
+                <a href="news.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">News</a>
+                <a href="contact.html" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Academic Excellence</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                Discover our comprehensive curriculum designed to challenge, inspire, and prepare students for success in an ever-changing world.
+            </p>
+        </div>
+    </section>
+
+    <!-- Academic Philosophy -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Academic Philosophy</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        At Greenwood Academy, we believe in nurturing the whole child through a balanced approach that combines rigorous academics with creative expression, critical thinking, and character development.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <span class="text-blue-600 font-bold">1</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Personalized Learning</h3>
+                                <p class="text-gray-600 text-sm">Tailored instruction to meet each student's unique needs and learning style</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <span class="text-green-600 font-bold">2</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Global Perspective</h3>
+                                <p class="text-gray-600 text-sm">International curriculum preparing students for global citizenship</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <span class="text-purple-600 font-bold">3</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Innovation & Technology</h3>
+                                <p class="text-gray-600 text-sm">Cutting-edge tools and methods to enhance learning experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8">
+                        <svg class="w-full h-80" viewBox="0 0 400 320" fill="none">
+                            <!-- Academic excellence illustration -->
+                            <circle cx="200" cy="160" r="100" fill="url(#academicGradient)" opacity="0.2"/>
+                            <circle cx="200" cy="160" r="70" fill="url(#academicGradient)" opacity="0.4"/>
+                            <circle cx="200" cy="160" r="40" fill="url(#academicGradient)"/>
+                            
+                            <!-- Subject areas around the circle -->
+                            <g transform="translate(200,60)">
+                                <circle r="20" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#1e40af" font-size="16">📚</text>
+                                <text text-anchor="middle" y="-30" fill="#1e40af" font-size="10" font-weight="600">Literature</text>
+                            </g>
+                            
+                            <g transform="translate(300,120)">
+                                <circle r="20" fill="white" stroke="#10b981" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#059669" font-size="16">🔬</text>
+                                <text text-anchor="middle" y="-30" fill="#059669" font-size="10" font-weight="600">Science</text>
+                            </g>
+                            
+                            <g transform="translate(300,200)">
+                                <circle r="20" fill="white" stroke="#8b5cf6" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#7c3aed" font-size="16">🎨</text>
+                                <text text-anchor="middle" y="25" fill="#7c3aed" font-size="10" font-weight="600">Arts</text>
+                            </g>
+                            
+                            <g transform="translate(200,260)">
+                                <circle r="20" fill="white" stroke="#f59e0b" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#d97706" font-size="16">⚽</text>
+                                <text text-anchor="middle" y="25" fill="#d97706" font-size="10" font-weight="600">Sports</text>
+                            </g>
+                            
+                            <g transform="translate(100,200)">
+                                <circle r="20" fill="white" stroke="#ef4444" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#dc2626" font-size="16">🔢</text>
+                                <text text-anchor="middle" y="25" fill="#dc2626" font-size="10" font-weight="600">Math</text>
+                            </g>
+                            
+                            <g transform="translate(100,120)">
+                                <circle r="20" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                                <text text-anchor="middle" y="7" fill="#0891b2" font-size="16">💻</text>
+                                <text text-anchor="middle" y="-30" fill="#0891b2" font-size="10" font-weight="600">Technology</text>
+                            </g>
+                            
+                            <defs>
+                                <radialGradient id="academicGradient" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                                    <stop offset="100%" style="stop-color:#1e40af"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Overview -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Curriculum Overview</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore our comprehensive curriculum designed for each grade level</p>
+            </div>
+            
+            <!-- Grade Level Tabs -->
+            <div class="flex flex-wrap justify-center mb-8 fade-in">
+                <button onclick="showCurriculum('elementary')" id="curriculum-tab-elementary" class="px-6 py-3 rounded-l-lg font-medium transition-colors tab-active">
+                    Elementary (K-5)
+                </button>
+                <button onclick="showCurriculum('middle')" id="curriculum-tab-middle" class="px-6 py-3 font-medium transition-colors tab-inactive">
+                    Middle School (6-8)
+                </button>
+                <button onclick="showCurriculum('high')" id="curriculum-tab-high" class="px-6 py-3 rounded-r-lg font-medium transition-colors tab-inactive">
+                    High School (9-12)
+                </button>
+            </div>
+            
+            <!-- Elementary Curriculum -->
+            <div id="curriculum-elementary" class="curriculum-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-language')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">📚</span>
+                                Language Arts
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Reading, writing, speaking, and listening skills development</p>
+                        <div id="elem-language" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Phonics and reading comprehension</li>
+                                    <li>• Creative and expository writing</li>
+                                    <li>• Vocabulary building</li>
+                                    <li>• Public speaking skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-math')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🔢</span>
+                                Mathematics
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Number sense, operations, and problem-solving strategies</p>
+                        <div id="elem-math" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Basic arithmetic operations</li>
+                                    <li>• Geometry and measurement</li>
+                                    <li>• Data analysis and graphing</li>
+                                    <li>• Mathematical reasoning</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-science')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🔬</span>
+                                Science
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Hands-on exploration of the natural world</p>
+                        <div id="elem-science" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Life science and biology basics</li>
+                                    <li>• Physical science concepts</li>
+                                    <li>• Earth and space science</li>
+                                    <li>• Scientific method and inquiry</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-social')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🌍</span>
+                                Social Studies
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">History, geography, and cultural awareness</p>
+                        <div id="elem-social" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Community and citizenship</li>
+                                    <li>• World cultures and traditions</li>
+                                    <li>• Basic geography skills</li>
+                                    <li>• Historical thinking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-arts')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🎨</span>
+                                Arts & Music
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Creative expression through various artistic mediums</p>
+                        <div id="elem-arts" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Visual arts and crafts</li>
+                                    <li>• Music appreciation and performance</li>
+                                    <li>• Drama and theater</li>
+                                    <li>• Creative movement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('elem-pe')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">⚽</span>
+                                Physical Education
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Physical fitness and healthy lifestyle habits</p>
+                        <div id="elem-pe" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Fundamental movement skills</li>
+                                    <li>• Team sports and games</li>
+                                    <li>• Health and nutrition education</li>
+                                    <li>• Cooperation and sportsmanship</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle School Curriculum -->
+            <div id="curriculum-middle" class="curriculum-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-english')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">📖</span>
+                                English Literature
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Advanced reading, writing, and literary analysis</p>
+                        <div id="middle-english" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Classic and contemporary literature</li>
+                                    <li>• Essay writing and composition</li>
+                                    <li>• Grammar and language mechanics</li>
+                                    <li>• Research and citation skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-algebra')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">📐</span>
+                                Pre-Algebra & Algebra
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Foundation for advanced mathematical concepts</p>
+                        <div id="middle-algebra" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Linear equations and inequalities</li>
+                                    <li>• Graphing and coordinate geometry</li>
+                                    <li>• Polynomials and factoring</li>
+                                    <li>• Problem-solving strategies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-biology')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🧬</span>
+                                Life Science
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Introduction to biology and life processes</p>
+                        <div id="middle-biology" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Cell structure and function</li>
+                                    <li>• Genetics and heredity</li>
+                                    <li>• Ecosystems and environment</li>
+                                    <li>• Human body systems</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-history')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🏛️</span>
+                                World History
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Ancient civilizations to modern times</p>
+                        <div id="middle-history" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Ancient civilizations</li>
+                                    <li>• Medieval and Renaissance periods</li>
+                                    <li>• Age of exploration and colonization</li>
+                                    <li>• Modern world developments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-language')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🗣️</span>
+                                World Languages
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Spanish, French, or Mandarin Chinese</p>
+                        <div id="middle-language" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Basic conversation skills</li>
+                                    <li>• Grammar and vocabulary</li>
+                                    <li>• Cultural awareness</li>
+                                    <li>• Reading and writing practice</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('middle-tech')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">💻</span>
+                                Technology
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Digital literacy and computer skills</p>
+                        <div id="middle-tech" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Computer programming basics</li>
+                                    <li>• Digital citizenship</li>
+                                    <li>• Multimedia creation</li>
+                                    <li>• Research and presentation skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- High School Curriculum -->
+            <div id="curriculum-high" class="curriculum-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-english')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">📚</span>
+                                IB English
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">International Baccalaureate English Language & Literature</p>
+                        <div id="high-english" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• World literature analysis</li>
+                                    <li>• Critical thinking and writing</li>
+                                    <li>• Oral presentations</li>
+                                    <li>• Extended essay project</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-calculus')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">∫</span>
+                                IB Mathematics
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Advanced mathematics including calculus and statistics</p>
+                        <div id="high-calculus" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Differential and integral calculus</li>
+                                    <li>• Statistics and probability</li>
+                                    <li>• Mathematical modeling</li>
+                                    <li>• Internal assessment project</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-physics')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">⚛️</span>
+                                IB Sciences
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Physics, Chemistry, Biology at Higher and Standard Level</p>
+                        <div id="high-physics" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Laboratory investigations</li>
+                                    <li>• Scientific research methods</li>
+                                    <li>• Theory of knowledge connections</li>
+                                    <li>• Group 4 collaborative project</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-humanities')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🌍</span>
+                                IB Humanities
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">History, Geography, Economics, and Psychology</p>
+                        <div id="high-humanities" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Historical investigation</li>
+                                    <li>• Global perspectives</li>
+                                    <li>• Research methodologies</li>
+                                    <li>• Critical analysis skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-arts')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🎭</span>
+                                IB Arts
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Visual Arts, Music, Theatre, or Film</p>
+                        <div id="high-arts" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Creative portfolio development</li>
+                                    <li>• Comparative study</li>
+                                    <li>• Exhibition or performance</li>
+                                    <li>• Process portfolio</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg course-card fade-in" onclick="toggleCourseDetails('high-tok')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center">
+                                <span class="text-2xl mr-3">🤔</span>
+                                Theory of Knowledge
+                            </h3>
+                            <span class="text-blue-600">+</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Critical thinking and knowledge inquiry</p>
+                        <div id="high-tok" class="course-details">
+                            <div class="border-t pt-4 mt-4">
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Ways of knowing</li>
+                                    <li>• Areas of knowledge</li>
+                                    <li>• TOK essay and presentation</li>
+                                    <li>• Philosophical inquiry</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Programs -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Special Programs</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Enrichment opportunities that extend beyond the traditional classroom</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🌍
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">International Baccalaureate</h3>
+                    <p class="text-gray-700 mb-4">Globally recognized diploma program preparing students for university success worldwide.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Rigorous academic curriculum</li>
+                        <li>• Extended essay project</li>
+                        <li>• Creativity, Activity, Service (CAS)</li>
+                        <li>• Theory of Knowledge course</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🔬
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">STEM Excellence</h3>
+                    <p class="text-gray-700 mb-4">Advanced science, technology, engineering, and mathematics programs.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• State-of-the-art laboratories</li>
+                        <li>• Robotics and coding clubs</li>
+                        <li>• Science fair competitions</li>
+                        <li>• Industry partnerships</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🎨
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Creative Arts</h3>
+                    <p class="text-gray-700 mb-4">Comprehensive arts education fostering creativity and self-expression.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Visual arts studio</li>
+                        <li>• Music performance ensembles</li>
+                        <li>• Drama and theater productions</li>
+                        <li>• Digital media creation</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🏆
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Athletics Program</h3>
+                    <p class="text-gray-700 mb-4">Competitive sports and physical education promoting teamwork and fitness.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Varsity and JV teams</li>
+                        <li>• Individual and team sports</li>
+                        <li>• Fitness and wellness programs</li>
+                        <li>• Leadership development</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🌱
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Service Learning</h3>
+                    <p class="text-gray-700 mb-4">Community engagement and social responsibility through service projects.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Local community partnerships</li>
+                        <li>• Environmental initiatives</li>
+                        <li>• Global awareness projects</li>
+                        <li>• Leadership opportunities</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 card-hover fade-in">
+                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        🎓
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">College Preparation</h3>
+                    <p class="text-gray-700 mb-4">Comprehensive guidance for university admissions and career planning.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• College counseling services</li>
+                        <li>• SAT/ACT preparation</li>
+                        <li>• University partnerships</li>
+                        <li>• Career exploration programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Highlights -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Distinguished Faculty</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet some of our exceptional educators who inspire and guide our students</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover fade-in">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                        DR
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Dr. Emily Watson</h3>
+                    <p class="text-blue-600 font-medium text-sm mb-2">IB Mathematics Coordinator</p>
+                    <p class="text-gray-600 text-xs mb-3">Ph.D. Mathematics, 15+ years teaching</p>
+                    <div class="text-xs text-gray-500">
+                        "Making complex concepts accessible to every student"
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover fade-in">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                        MR
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Mr. David Kim</h3>
+                    <p class="text-green-600 font-medium text-sm mb-2">Science Department Head</p>
+                    <p class="text-gray-600 text-xs mb-3">M.S. Chemistry, Former Research Scientist</p>
+                    <div class="text-xs text-gray-500">
+                        "Inspiring the next generation of scientists"
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover fade-in">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                        MS
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Ms. Sarah Johnson</h3>
+                    <p class="text-purple-600 font-medium text-sm mb-2">English Literature Teacher</p>
+                    <p class="text-gray-600 text-xs mb-3">M.A. English Literature, Published Author</p>
+                    <div class="text-xs text-gray-500">
+                        "Fostering critical thinking through literature"
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover fade-in">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                        MR
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Mr. Carlos Martinez</h3>
+                    <p class="text-orange-600 font-medium text-sm mb-2">World Languages Coordinator</p>
+                    <p class="text-gray-600 text-xs mb-3">M.A. Applied Linguistics, Polyglot</p>
+                    <div class="text-xs text-gray-500">
+                        "Opening doors through language learning"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Achievements -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Academic Achievements</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our students consistently excel in academics and beyond</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">98%</div>
+                    <div class="text-gray-600 text-sm">IB Diploma Pass Rate</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-green-600 mb-2">42</div>
+                    <div class="text-gray-600 text-sm">Average IB Score</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">100%</div>
+                    <div class="text-gray-600 text-sm">University Acceptance</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">$2.5M</div>
+                    <div class="text-gray-600 text-sm">Scholarships Awarded</div>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 rounded-xl p-6 fade-in">
+                    <h3 class="text-lg font-bold text-blue-900 mb-3">🏆 Recent Awards</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• National Merit Scholars (5 students)</li>
+                        <li>• State Science Fair Winners</li>
+                        <li>• Regional Math Competition Champions</li>
+                        <li>• Model UN Outstanding Delegation</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 fade-in">
+                    <h3 class="text-lg font-bold text-green-900 mb-3">🎓 University Destinations</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• Harvard University</li>
+                        <li>• Stanford University</li>
+                        <li>• MIT</li>
+                        <li>• Oxford University</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-50 rounded-xl p-6 fade-in">
+                    <h3 class="text-lg font-bold text-purple-900 mb-3">📚 Academic Recognition</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• IB World School Authorization</li>
+                        <li>• STEM Excellence Award</li>
+                        <li>• Arts Education Recognition</li>
+                        <li>• Community Service Leadership</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Ready to Excel?</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                Join our academic community and unlock your potential for success.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="window.location.href='admission.html'" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Apply Now
+                </button>
+                <button id="virtual-tour-button" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Schedule a Visit
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">GA</span>
+                        </div>
+                        <span class="text-xl font-bold">Greenwood Academy</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Excellence in education for over 25 years</p>
+                    <div class="flex space-x-4">
+                        <button class="text-gray-400 hover:text-white">📘</button>
+                        <button class="text-gray-400 hover:text-white">🐦</button>
+                        <button class="text-gray-400 hover:text-white">📷</button>
+                        <button class="text-gray-400 hover:text-white">💼</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="admission.html" class="hover:text-white">Admissions</a></li>
+                        <li><a href="academics.html" class="hover:text-white">Academics</a></li>
+                        <li><a href="news.html" class="hover:text-white">Student Life</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📍 123 Education Street<br>Learning City, LC 12345</li>
+                        <li>📞 (555) 123-4567</li>
+                        <li>✉️ info@greenwoodacademy.edu</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Stay updated with our latest news</p>
+                    <div class="flex relative w-full">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-2 rounded-l-lg text-gray-900">
+                        <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Greenwood Academy. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Curriculum tabs functionality
+        function showCurriculum(level) {
+            // Hide all content
+            document.querySelectorAll('.curriculum-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('[id^="curriculum-tab-"]').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('tab-inactive');
+            });
+            
+            // Show selected content
+            document.getElementById(`curriculum-${level}`).classList.remove('hidden');
+            
+            // Add active class to selected tab
+            document.getElementById(`curriculum-tab-${level}`).classList.remove('tab-inactive');
+            document.getElementById(`curriculum-tab-${level}`).classList.add('tab-active');
+        }
+
+        // Course details toggle functionality
+        function toggleCourseDetails(courseId) {
+            const details = document.getElementById(courseId);
+            const card = details.closest('.course-card');
+            const icon = card.querySelector('.text-blue-600');
+            
+            if (details.classList.contains('expanded')) {
+                details.classList.remove('expanded');
+                icon.textContent = '+';
+            } else {
+                // Close all other expanded details first
+                document.querySelectorAll('.course-details.expanded').forEach(detail => {
+                    detail.classList.remove('expanded');
+                    detail.closest('.course-card').querySelector('.text-blue-600').textContent = '+';
+                });
+                
+                details.classList.add('expanded');
+                icon.textContent = '−';
+            }
+        }
+
+        // Newsletter subscription
+        const newsletterForm = document.querySelector('footer input[type="email"]').parentElement;
+        const subscribeBtn = newsletterForm.querySelector('button');
+        const emailInput = newsletterForm.querySelector('input');
+        
+        subscribeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (emailInput.value.trim()) {
+                subscribeBtn.textContent = 'Subscribed!';
+                subscribeBtn.classList.add('bg-green-600');
+                subscribeBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                emailInput.value = '';
+                
+                setTimeout(() => {
+                    subscribeBtn.textContent = 'Subscribe';
+                    subscribeBtn.classList.remove('bg-green-600');
+                    subscribeBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }, 2000);
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <div id="virtual-tour-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Schedule a Visit</h2>
+        <form id="virtual-tour-form">
+          <input type="hidden" name="access_key" value="219dd725-fc8e-4009-b65a-d2385de4c796">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="contact">Contact Number:</label>
+          <input type="tel" id="contact" name="contact" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="visit-date">Choose a date to visit:</label>
+          <input type="date" id="visit-date" name="visit-date" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+<script src="modal.js"></script>
+<script src="navbar.js"></script>
+</body>
+</html>
